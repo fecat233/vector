@@ -1,10 +1,42 @@
+import { useState, useEffect } from 'react';
+import Epub, { Book } from 'epubjs';
+const Pdfjs = require('pdfjs-dist');
+const pdfWorker = require('pdfjs-dist/build/pdf.worker.entry');
 import BookViewer from './features/bookviewer/BookViewer';
 import './App.css';
 
 export default function App() {
+  // console.log('render App')
+  const [book, setBook] = useState({});
+  Pdfjs.GlobalWorkerOptions.workerSrc = pdfWorker;
+  useEffect(() => {
+    window.electron.ipcRenderer.on('openFile', (arg) => {
+      if(arg) {
+        if(arg instanceof ArrayBuffer) {
+          const epub: Book = Epub(arg);
+          setBook(epub);
+        } else if(arg instanceof Uint8Array) {
+          Pdfjs.getDocument({
+            data: arg,
+            cMapUrl: 'cmaps/',
+            cMapPacked: true
+          }).promise.then((pdf) => {
+            setBook(pdf);
+          }).catch((err) => {
+            console.log(err);
+          })
+        }
+      }
+    });
+    //setBook(new Date())
+    // console.log('setBook');
+  }, [])
   return (
-    <div>
-      <BookViewer />
-    </div>
+    <>
+      {
+        Object.keys(book).length === 0? <p>Vector</p>: <BookViewer book={book}/>
+      }
+      {/* <BookViewer book={book}/> */}
+    </>
   );
 }

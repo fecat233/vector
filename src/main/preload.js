@@ -6,17 +6,17 @@ contextBridge.exposeInMainWorld('electron', {
       ipcRenderer.send('ipc-example', 'ping');
     },
     openFile() {
-      ipcRenderer.send('openFile', 'open file renderer')
+      ipcRenderer.send('openFile', 'openFile')
     },
     on(channel, func) {
-      const validChannels = ['ipc-example', 'openFile'];
+      const validChannels = ['ipc-example', 'open', 'openFile'];
       if (validChannels.includes(channel)) {
         // Deliberately strip event as it includes `sender`
         ipcRenderer.on(channel, (event, ...args) => func(...args));
       }
     },
     once(channel, func) {
-      const validChannels = ['ipc-example', 'openFile'];
+      const validChannels = ['ipc-example', 'open', 'openFile'];
       if (validChannels.includes(channel)) {
         // Deliberately strip event as it includes `sender`
         ipcRenderer.once(channel, (event, ...args) => func(...args));

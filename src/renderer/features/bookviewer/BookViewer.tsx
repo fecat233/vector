@@ -1,36 +1,17 @@
-import { useState } from 'react'
-import EpubViewer from '../epub/EpubViewer'
-import Epub, { Book } from 'epubjs'
+import { Book } from 'epubjs';
+import EpubViewer from '../epub/EpubViewer';
+import PdfViewer from '../pdf/PdfViewer';
 
-const BookViewer = () => {
-  let fileUrl = ''
-  window.electron.ipcRenderer.openFile()
-  window.electron.ipcRenderer.once('openFile', (arg) => {
-    if(arg) {
-      fileUrl = arg
-    }
-  });
-  const [book, setBook] = useState(null); //uploaded book
+const BookViewer = (props: any) => {
+  // console.log('render BookViewer');
+
   return (
-    <div>
-      <EpubViewer book={book} />
-      <button onClick={openFile}>开始阅读</button>
-    </div>
+    <>
+      {
+        props.book instanceof Book ? <EpubViewer book={props.book}/>:<PdfViewer book={props.book}/>
+      }
+    </>
   )
-
-  function onFileChange(file: any) {
-    const fileReader = new FileReader()
-    fileReader.readAsArrayBuffer(file)
-    fileReader.onload = function(e: any) {
-      const epub: Book = Epub(e.target.result)
-      setBook(epub)
-    }
-  }
-
-  function openFile() {
-    const epub: Book = Epub(fileUrl)
-    setBook(epub)
-  }
 }
 
 export default BookViewer

@@ -5,6 +5,7 @@
 import path from 'path';
 import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
+import CopyWebpackPlugin from 'copy-webpack-plugin'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
@@ -62,12 +63,13 @@ export default merge(baseConfig, {
             },
           },
           'sass-loader',
+          'postcss-loader'
         ],
         include: /\.module\.s?(c|a)ss$/,
       },
       {
         test: /\.s?(a|c)ss$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader', 'postcss-loader'],
         exclude: /\.module\.s?(c|a)ss$/,
       },
       // Fonts
@@ -110,6 +112,15 @@ export default merge(baseConfig, {
 
     new MiniCssExtractPlugin({
       filename: 'style.css',
+    }),
+
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: 'node_modules/pdfjs-dist/cmaps',
+          to: 'cmaps/'
+        }
+      ]
     }),
 
     new BundleAnalyzerPlugin({

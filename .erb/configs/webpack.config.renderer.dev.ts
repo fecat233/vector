@@ -2,6 +2,7 @@ import path from 'path';
 import fs from 'fs';
 import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
+import CopyWebpackPlugin from 'copy-webpack-plugin'
 import chalk from 'chalk';
 import { merge } from 'webpack-merge';
 import { spawn, execSync } from 'child_process';
@@ -76,12 +77,13 @@ export default merge(baseConfig, {
             },
           },
           'sass-loader',
+          'postcss-loader'
         ],
         include: /\.module\.s?(c|a)ss$/,
       },
       {
         test: /\.s?css$/,
-        use: ['style-loader', 'css-loader', 'sass-loader'],
+        use: ['style-loader', 'css-loader', 'sass-loader', 'postcss-loader'],
         exclude: /\.module\.s?(c|a)ss$/,
       },
       // Fonts
@@ -106,6 +108,15 @@ export default merge(baseConfig, {
         }),
 
     new webpack.NoEmitOnErrorsPlugin(),
+
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: 'node_modules/pdfjs-dist/cmaps',
+          to: 'cmaps/'
+        }
+      ]
+    }),
 
     /**
      * Create global constants which can be configured at compile time.

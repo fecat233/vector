@@ -6,6 +6,7 @@ import {
   MenuItemConstructorOptions,
   dialog
 } from 'electron';
+import fs from 'fs'
 
 interface DarwinMenuItemConstructorOptions extends MenuItemConstructorOptions {
   selector?: string;
@@ -203,7 +204,18 @@ export default class MenuBuilder {
             accelerator: 'Ctrl+O',
             click: () => {
               dialog.showOpenDialog({properties: ['openFile']}).then((result) => {
-                this.mainWindow.webContents.send('openFile', result.filePaths[0])
+                if (result.filePaths.length) {
+                  const fileUrl = result.filePaths[0];
+                  const bookABuffer = fs.readFileSync(fileUrl).buffer; //epub
+                  if(fileUrl.match(new RegExp('.epub'))) {
+                    this.mainWindow.webContents.send('openFile', bookABuffer); // epub
+                  } else if(fileUrl.match(new RegExp('.pdf'))) {
+                    const bookTArray = new Uint8Array(bookABuffer); //pdf
+                    this.mainWindow.webContents.send('openFile', bookTArray);
+                  }
+                }
+              }).catch((err) => {
+                console.log(err);
               })
             }
           },
