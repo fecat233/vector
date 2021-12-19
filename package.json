@@ -31,7 +31,7 @@
   },
   "build": {
     "productName": "Vector",
-    "appId": "org.erb.Vector",
+    "appId": "me.lifan.Vector",
     "asar": true,
     "asarUnpack": "**\\*.{node,dll}",
     "files": [
@@ -73,6 +73,15 @@
         "nsis"
       ]
     },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": true,
+      "allowElevation": true,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "runAfterFinish": false,
+      "deleteAppDataOnUninstall": true
+    },
     "linux": {
       "target": [
         "AppImage"
@@ -111,7 +120,7 @@
     "tailwindcss",
     "ebook reader"
   ],
-  "homepage": "https://github.com/electron-react-boilerplate/electron-react-boilerplate#readme",
+  "homepage": "https://github.com/lifan1727/vector#readme",
   "jest": {
     "testURL": "http://localhost/",
     "testEnvironment": "jsdom",
