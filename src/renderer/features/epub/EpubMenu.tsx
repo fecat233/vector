@@ -23,13 +23,14 @@ const EpubMenu = (props: any) => {
 
   return (
     <div id="menu" className="float-left h-full w-1/5 shadow bg-white">
-      <button onClick={showMenu}>目录</button>
-      <div id="menu" className="p-3">
+      <button onClick={showMenu} className="bg-sky-400 text-white p-4 w-full border-none">目录</button>
+      <div id="menulist" className="overflow-auto scollbar h-5/6">
         <ul>
           {
             tocs? tocs.map((toc) => {
-              return <li key={toc.id}>
-                <a onClick={showNewPage} id={toc.href} className="p-2 cursor-pointer text-slate-700">{toc.label}</a>
+              return <li key={toc.id} className="p-2 m-2">
+                <a onClick={showNewPage} id={toc.href} className="cursor-pointe
+                   align-middle">{toc.label}</a>
               </li>
             }): ''
           }

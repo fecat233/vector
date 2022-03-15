@@ -3,6 +3,7 @@ import Epub, { Book } from 'epubjs';
 const Pdfjs = require('pdfjs-dist');
 const pdfWorker = require('pdfjs-dist/build/pdf.worker.entry');
 import BookViewer from './features/bookviewer/BookViewer';
+import Home from './features/home/Home';
 import './App.css';
 
 export default function App() {
@@ -34,9 +35,8 @@ export default function App() {
   return (
     <>
       {
-        Object.keys(book).length === 0? <p>Vector</p>: <BookViewer book={book}/>
+       Object.keys(book).length === 0? <Home />: <BookViewer book={book}/>
       }
-      {/* <BookViewer book={book}/> */}
     </>
   );
 }

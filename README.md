@@ -1,3 +1,6 @@
 ![vector](./assets/icon.png)
 
-a ebook reader which based on electron-react-boilerplate
+A ebook reader for epub which based on electron-react-boilerplate
+
+## Preview
+![preview1](./assets/preview/preview1.png)

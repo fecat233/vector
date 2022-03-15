@@ -1,5 +1,6 @@
 {
   "name": "vector",
+  "version": "1.0.0",
   "description": "a ebook reader which based on electron-react-boilerplate",
   "scripts": {
     "build": "concurrently \"yarn build:main\" \"yarn build:renderer\"",
@@ -99,7 +100,7 @@
     "publish": {
       "provider": "github",
       "owner": "lifan1727",
-      "repo": ""
+      "repo": "https://github.com/lifan1727/vector"
     }
   },
   "repository": {
@@ -107,7 +108,7 @@
     "url": "https://github.com/lifan1727/vector"
   },
   "author": {
-    "name": "lifan"
+    "name": "zhangli"
   },
   "license": "MIT",
   "bugs": {

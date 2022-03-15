@@ -36,8 +36,8 @@ class EpubContent extends Component {
         <div id="content" className="h-5/6 p-3 m-3 shadow bg-white">
         </div>
         <div id="changePage" className="text-center">
-          <button onClick={this.prevPage} className="p-3 rounded-full mr-1 bg-teal-500 text-white">☜(ﾟヮﾟ☜)</button>
-          <button onClick={this.nextPage} className="p-3 rounded-full ml-1 bg-teal-500 text-white">(☞ﾟヮﾟ)☞</button>
+          <button onClick={this.prevPage} className="p-3 rounded-full mr-1 bg-sky-400 text-white">☜(ﾟヮﾟ☜)</button>
+          <button onClick={this.nextPage} className="p-3 rounded-full ml-1 bg-sky-400 text-white">(☞ﾟヮﾟ)☞</button>
         </div>
       </div>
     )
