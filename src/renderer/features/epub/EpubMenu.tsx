@@ -29,7 +29,7 @@ const EpubMenu = (props: any) => {
           {
             tocs? tocs.map((toc) => {
               return <li key={toc.id} className="p-2 m-2">
-                <a onClick={showNewPage} id={toc.href} className="cursor-pointe
+                <a onClick={showNewPage} id={toc.href} className="cursor-pointer
                    align-middle">{toc.label}</a>
               </li>
             }): ''

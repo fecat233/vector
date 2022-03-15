@@ -1,6 +1,6 @@
 {
   "name": "vector",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "a ebook reader which based on electron-react-boilerplate",
   "main": "./dist/main/main.js",
   "author": {
